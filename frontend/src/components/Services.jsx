@@ -1,4 +1,5 @@
 import React from 'react';
+import SpotlightCard from './Spotlight.jsx';
 
 const bentoItems = [
   {
@@ -85,9 +86,9 @@ export default function Services() {
 
       <div className="grid grid-cols-12 gap-4">
         {bentoItems.map((item, idx) => (
-          <div
+          <SpotlightCard
             key={idx}
-            className={`${item.colSpan} group relative rounded-xl border border-white/10 bg-zinc-900/40 p-6 md:p-8 backdrop-blur-md overflow-hidden hover:border-white/20 transition-all duration-300`}
+            className={`${item.colSpan} rounded-xl border border-white/10 bg-zinc-900/40 p-6 backdrop-blur-md hover:border-white/20 md:p-8`}
           >
             {/* Ambient hover glow */}
             <div className="absolute -inset-px bg-gradient-to-b from-purple-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -107,7 +108,7 @@ export default function Services() {
 
               {item.graphic}
             </div>
-          </div>
+          </SpotlightCard>
         ))}
       </div>
     </section>
