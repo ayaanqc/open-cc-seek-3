@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0a0a0d;
+  color: #f4f1ea;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Consistent, restrained focus ring across interactive elements. */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #c724e8;
+  outline-offset: 2px;
+}
+
+::selection {
+  background: #c724e8;
+  color: #0a0a0d;
+}
+
+/* Wireframe / blueprint grid used in the About section. */
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(244, 241, 234, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 241, 234, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-position: center;
+}
+
+/* Subtle scroll reveal. Toggled by the Reveal component on intersect. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Restrained motion for the 3D fluid focal element. Single hue, slow. */
+@keyframes fluid-morph {
+  0%,
+  100% {
+    border-radius: 44% 56% 58% 42% / 52% 44% 56% 48%;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    border-radius: 56% 44% 42% 58% / 46% 58% 42% 54%;
+    transform: translate3d(0, -14px, 0) scale(1.03);
+  }
+}
+
+@keyframes fluid-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fluid-body {
+  animation: fluid-morph 16s ease-in-out infinite;
+}
+
+.fluid-ring {
+  animation: fluid-spin 34s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .fluid-body,
+  .fluid-ring {
+    animation: none;
+  }
+}
