@@ -1,70 +1,69 @@
-import Reveal from './Reveal.jsx';
+import { useRef } from 'react';
+import { useParallax, useReveal } from '../lib/effects.js';
+import FluidBlob from './FluidBlob.jsx';
+import Btn from './Btn.jsx';
 
-const CAPABILITIES = [
-  {
-    index: '01',
-    title: 'Product Strategy',
-    body: 'We translate business goals into a clear product roadmap, defining scope, success metrics, and the sequencing to reach them.',
-  },
-  {
-    index: '02',
-    title: 'Interface Design',
-    body: 'We craft accessible, high-fidelity interfaces and design systems that stay consistent as your product and team grow.',
-  },
-  {
-    index: '03',
-    title: 'Platform Engineering',
-    body: 'We build and ship production web platforms, from component libraries to performant frontends and well-documented APIs.',
-  },
-];
+const BODY =
+  'Providing comprehensive business management consulting services tailored to the unique needs of our clients.' +
+  ' Opticore is a leading consultancy firm comprised of seasoned professionals dedicated to empowering businesses to achieve their full potential.' +
+  ' With a team of experts spanning various industries and disciplines, we bring a wealth of experience and insight to every project we undertake.';
 
-/**
- * About. Opens with a wireframe grid and a low-opacity "ABOUT" watermark,
- * then lays out the consultancy's positioning and core capabilities.
- */
 export default function About() {
-  return (
-    <section id="about" className="relative overflow-hidden border-t border-white/10 py-24 sm:py-32">
-      {/* Wireframe grid backdrop */}
-      <div className="grid-lines pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+  const wrapRef = useRef(null);
+  useReveal(wrapRef, { threshold: 0.1 });
 
+  return (
+    <section id="about" className="relative overflow-hidden border-t border-white/5 py-32 lg:py-40">
       {/* ABOUT watermark */}
       <span
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-8 -translate-x-1/2 select-none text-[22vw] font-extrabold leading-none tracking-tight text-transparent sm:text-[16rem]"
-        style={{ WebkitTextStroke: '1px rgba(244,241,234,0.06)' }}
+        className="pointer-events-none absolute left-1/2 top-1/4 -translate-x-1/2 -translate-y-1/2 select-none text-[26vw] font-black leading-none tracking-tighter text-transparent sm:text-[20rem] lg:text-[32rem]"
+        style={{
+          WebkitTextStroke: '1px rgba(255,255,255,0.03)',
+        }}
       >
         ABOUT
       </span>
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        {/* Positioning */}
-        <Reveal className="max-w-2xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-accent" aria-hidden />
-            <span className="font-mono text-[11px] uppercase tracking-ultra text-mute">Who we are</span>
-          </div>
-          <h2 className="mt-6 text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-            A senior consultancy for teams that treat software as a product,
-            not a project.
-          </h2>
-          <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-mute">
-            Opticore partners with founders and product leaders to close the gap between
-            ambition and what actually ships. We embed with your team, work in short
-            cycles, and leave behind systems your engineers can own and extend.
-          </p>
-        </Reveal>
+      {/* Left fluid shape */}
+      <div className="hidden lg:block absolute left-0 top-1/4 -translate-y-1/2 w-[70vw] max-w-[700px] h-[700px]">
+        <FluidBlob className="absolute inset-0" />
+      </div>
 
-        {/* Capabilities */}
-        <div id="services" className="mt-16 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-3">
-          {CAPABILITIES.map((item, i) => (
-            <Reveal key={item.index} delay={i * 90} className="bg-void p-7">
-              <span className="font-mono text-[11px] tracking-ultra text-accent">{item.index}</span>
-              <h3 className="mt-5 text-lg font-semibold tracking-tight">{item.title}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-mute">{item.body}</p>
-            </Reveal>
-          ))}
+      <div className="relative mx-auto max-w-6xl px-6 lg:px-10 flex flex-col lg:flex-row items-start gap-20">
+        {/* Right copy */}
+        <div className="flex-1 max-w-2xl reveal reveal-delay-1">
+          <div className="inline-flex items-center gap-2 mb-6">
+            <span className="h-2 w-8 bg-gradient-to-r from-accent-purple to-accent-pink rounded-full" aria-hidden />
+            <span className="font-display text-xs font-bold tracking-[0.28em] text-mute uppercase">Section 01</span>
+          </div>
+
+          <h2 className="font-display text-3xl font-bold leading-none tracking-tightest text-white sm:text-4xl lg:text-5xl">
+            WHO WE ARE
+          </h2>
+
+          <p className="mt-6 text-[14px] leading-relaxed text-mute max-w-xl">
+            {BODY}
+          </p>
+
+          <div className="mt-10 flex items-center gap-4">
+            <Btn href="#contact" variant="primary">
+              Read more <span aria-hidden>☎</span>
+            </Btn>
+            <div className="hidden sm:block h-[1px] w-[120px] bg-gradient-to-r from-transparent via-accent-purple/40 to-transparent" />
+          </div>
         </div>
+
+        {/* Right-edge fluid accent */}
+        <div className="hidden lg:block relative h-[560px] w-full reveal reveal-delay-2">
+          <FluidBlob className="absolute inset-0" style={{ transform: 'scaleX(-1)' }} />
+        </div>
+      </div>
+
+      {/* Page indicator */}
+      <div className="absolute bottom-12 right-12 flex items-end gap-2">
+        <span className="font-mono text-[11px] font-bold text-mute">01</span>
+        <div className="h-0.5 w-16 bg-white/10" />
       </div>
     </section>
   );

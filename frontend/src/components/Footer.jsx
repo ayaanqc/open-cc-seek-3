@@ -1,39 +1,25 @@
-const NAV = [
-  { label: 'Work', href: '#work' },
-  { label: 'Services', href: '#services' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
-];
-
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-2.5">
-          <span
-            aria-hidden
-            className="h-5 w-5 rounded-[3px]"
-            style={{ background: 'linear-gradient(135deg, #C724E8 0%, #7C3AED 100%)' }}
-          />
-          <span className="text-[15px] font-semibold tracking-tight">Opticore</span>
+    <footer className="border-t border-white/5 bg-white/5">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-14 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-2">
+          <span className="h-5 w-5 rounded-full bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center text-[9px] font-bold text-white">
+            O
+          </span>
+          <span className="font-display text-[14px] font-bold tracking-tighter text-white">OPTICORE</span>
         </div>
 
-        <nav aria-label="Footer">
-          <ul className="flex flex-wrap items-center gap-7">
-            {NAV.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="text-[13px] text-mute transition-colors duration-200 hover:text-bone"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex flex-wrap items-center gap-8 text-[12px] font-medium text-mute uppercase tracking-widest">
+          <a href="#top" className="transition-colors hover:text-white">Home</a>
+          <a href="#about" className="transition-colors hover:text-white">About</a>
+          <a href="#services" className="transition-colors hover:text-white">Services</a>
+          <a href="#process" className="transition-colors hover:text-white">Process</a>
+          <a href="#clients" className="transition-colors hover:text-white">Clients</a>
+        </div>
 
-        <p className="text-[12px] text-mute">© {new Date().getFullYear()} Opticore. All rights reserved.</p>
+        <p className="text-[11px] text-mute">
+          © {new Date().getFullYear()} Opticore. All rights reserved.
+        </p>
       </div>
     </footer>
   );

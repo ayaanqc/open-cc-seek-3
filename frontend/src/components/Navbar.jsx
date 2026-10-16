@@ -1,64 +1,73 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useReveal } from '../lib/effects.js';
+import Btn from './Btn.jsx';
 
 const LINKS = [
-  { label: 'Work', href: '#work' },
-  { label: 'Services', href: '#services' },
+  { label: 'Home', href: '#top' },
   { label: 'About', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Process', href: '#process' },
+  { label: 'Clients', href: '#clients' },
 ];
 
-/**
- * Top navigation. Fixed, with a hairline border that appears once the page
- * scrolls. Rectangular CTA on the right, no pill shapes.
- */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef(null);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useReveal(navRef, { threshold: 0.05 });
+
+  const handleScroll = () => setScrolled(window.scrollY > 10);
+  const activeHash = () => {
+    const hash = window.location.hash;
+    return hash || '#top';
+  };
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'border-b border-white/10 bg-void/80 backdrop-blur-md' : 'border-b border-transparent'
-      }`}
-    >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        {/* Logo slot */}
-        <a href="#top" className="flex items-center gap-2.5">
-          <span
-            aria-hidden
-            className="h-5 w-5 rounded-[3px]"
-            style={{ background: 'linear-gradient(135deg, #C724E8 0%, #7C3AED 100%)' }}
-          />
-          <span className="text-[15px] font-semibold tracking-tight">Opticore</span>
-        </a>
+    <>
+      <nav
+        ref={navRef}
+        className="fixed inset-x-0 top-0 z-50 transition-all duration-400"
+        style={{
+          background: scrolled
+            ? 'rgba(5, 5, 10, 0.85)'
+            : 'rgba(5, 5, 10, 0.35)',
+          backdropFilter: scrolled ? 'blur(24px)' : 'blur(16px)',
+          borderBottom: `1px solid ${scrolled ? 'rgba(255,255,255,0.12)' : 'transparent'}`,
+        }}
+      >
+        <div className="mx-auto max-w-7xl h-16 flex items-center justify-between px-6 lg:px-10">
+          {/* Logo */}
+          <a href="#top" className="flex items-center gap-2">
+            <span className="h-5 w-5 rounded-full bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center text-[9px] font-bold text-white">
+              O
+            </span>
+            <span className="font-display text-[15px] font-bold tracking-tighter text-white">
+              OPTICORE
+            </span>
+          </a>
 
-        {/* Centered links */}
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 md:flex">
-          {LINKS.map((link) => (
-            <li key={link.label}>
+          {/* Centered links */}
+          <div className="hidden md:flex items-center gap-8 text-[12px] font-medium text-mute uppercase tracking-widest">
+            {LINKS.map((link) => (
               <a
+                key={link.label}
                 href={link.href}
-                className="text-[13px] font-medium text-mute transition-colors duration-200 hover:text-bone"
+                className={`transition-colors duration-300 ${
+                  activeHash() === link.href.toLowerCase()
+                    ? 'text-white'
+                    : 'text-mute hover:text-white'
+                }`}
               >
                 {link.label}
               </a>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
 
-        {/* Primary CTA — rectangular, sharp corners */}
-        <a
-          href="#contact"
-          className="rounded-[4px] border border-white/15 px-4 py-2 text-[13px] font-medium text-bone transition-colors duration-200 hover:border-accent hover:bg-accent/10"
-        >
-          Start a Project
-        </a>
+          <Btn href="#contact" variant="primary">
+            Start a Project
+          </Btn>
+        </div>
       </nav>
-    </header>
+    </>
   );
 }
