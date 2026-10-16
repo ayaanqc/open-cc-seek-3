@@ -1,3 +1,4 @@
+import OrbVisual from './OrbVisual.jsx';
 import Reveal from './Reveal.jsx';
 
 const POINTS = [
@@ -9,7 +10,7 @@ const POINTS = [
 
 export default function Security() {
   return (
-    <section id="security" className="relative border-t border-white/8 py-28 sm:py-36 bg-black overflow-hidden">
+    <section id="security" className="relative border-t border-white/10 py-28 sm:py-36 bg-black overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
@@ -18,7 +19,8 @@ export default function Security() {
             'radial-gradient(ellipse at 80% 30%, rgba(168,85,247,0.08) 0%, transparent 40%)',
         }}
       />
-      <div className="mx-auto max-w-[1200px] px-6 sm:px-10 grid gap-12 items-center lg:grid-cols-2 lg:gap-20">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-6 sm:px-8 lg:grid-cols-[1fr_340px] lg:gap-14">
+        <div>
         <Reveal>
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-neutral-500 mb-3">03 — AI Security</p>
           <h2 className="text-[28px] font-medium leading-[1.2] tracking-tight text-white sm:text-[36px]">
@@ -31,7 +33,7 @@ export default function Security() {
           </p>
         </Reveal>
         <Reveal delay="0.12">
-          <ul className="divide-y divide-white/8 rounded-2xl border border-white/8 bg-white/[0.02]">
+          <ul className="divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.02]">
             {POINTS.map((point) => (
               <li key={point} className="flex items-start gap-3 px-6 py-5 hover:bg-white/[0.03] transition-colors">
                 <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-purple-400" />
@@ -39,6 +41,13 @@ export default function Security() {
               </li>
             ))}
           </ul>
+        </Reveal>
+        </div>
+        <Reveal delay={0.2} className="hidden lg:block">
+          <OrbVisual className="h-[360px] w-full" />
+          <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-600">
+            live model — move your cursor across it
+          </p>
         </Reveal>
       </div>
     </section>

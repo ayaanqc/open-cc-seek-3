@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer id="resources" className="border-t border-white/8 bg-black">
+    <footer id="resources" className="border-t border-white/10 bg-black">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-10">
         <a href="#top" className="text-[17px] font-semibold tracking-tighter text-white">
           opticore

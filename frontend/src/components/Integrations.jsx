@@ -4,7 +4,7 @@ const TOOLS = ['Slack', 'Figma', 'GitHub', 'Linear', 'Notion', 'Vercel'];
 
 export default function Integrations() {
   return (
-    <section id="integrations" className="relative border-t border-white/8 py-20 sm:py-28 bg-black">
+    <section id="integrations" className="relative border-t border-white/10 py-20 sm:py-28 bg-black">
       <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
         <Reveal className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div>
