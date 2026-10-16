@@ -9,7 +9,7 @@ import Services from './components/Services.jsx';
 
 export default function App() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-void font-sans text-bone">
+    <div className="relative min-h-screen overflow-x-hidden bg-black font-sans text-neutral-100 selection:bg-purple-400 selection:text-black">
       <Navbar />
       <main>
         <Hero />

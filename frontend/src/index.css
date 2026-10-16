@@ -27,18 +27,35 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
+/* Custom cursor takes over on precise pointers; keep the native one
+   everywhere else (touch, reduced motion handled in the component). */
+@media (pointer: fine) {
+  body, a, button, input, textarea, [role='button'] {
+    cursor: none;
+  }
+}
+
 ::selection {
-  background: #f5f5f4;
+  background: #a855f7;
   color: #000000;
 }
 
-/* Scroll reveal — short fade and rise, nothing bouncy. */
+/* Film grain — subtle photographic texture over flat black. */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scroll reveal base state. */
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 28px, 0);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.is-visible {
@@ -46,41 +63,18 @@ textarea:focus-visible {
   transform: translate3d(0, 0, 0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.22s; }
-.reveal-delay-3 { transition-delay: 0.34s; }
-
-/* Film grain — barely-there texture so flat black feels photographic. */
-.grain::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Subtle bounce for scroll cue dot. */
+@keyframes bounceDot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
-/* Gentle float for the crystal core. */
-@keyframes core-float {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -10px, 0); }
-}
-
-.core-float {
-  animation: core-float 7s ease-in-out infinite;
-}
-
-@keyframes core-pulse {
-  0%, 100% { opacity: 0.75; }
-  50% { opacity: 1; }
-}
-
-.core-pulse {
-  animation: core-pulse 4.5s ease-in-out infinite;
+.animate-bounce {
+  animation: bounceDot 2s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .core-float, .core-pulse { animation: none; }
+  .animate-bounce { animation: none; }
 }

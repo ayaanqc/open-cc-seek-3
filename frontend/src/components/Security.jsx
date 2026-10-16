@@ -7,14 +7,21 @@ const POINTS = [
   'Weekly plain-English notes on what the system did and why.',
 ];
 
-/** AI Security — reassurance in concrete terms, not slogans. */
 export default function Security() {
   return (
-    <section id="security" className="relative border-t border-white/10 py-24 sm:py-32">
-      <div className="mx-auto grid max-w-[1200px] gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
+    <section id="security" className="relative border-t border-white/8 py-28 sm:py-36 bg-black overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            'radial-gradient(ellipse at 80% 30%, rgba(168,85,247,0.08) 0%, transparent 40%)',
+        }}
+      />
+      <div className="mx-auto max-w-[1200px] px-6 sm:px-10 grid gap-12 items-center lg:grid-cols-2 lg:gap-20">
         <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-neutral-500">03 — AI Security</p>
-          <h2 className="mt-4 text-[26px] font-medium leading-tight tracking-tight text-neutral-100 sm:text-[32px]">
+          <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-neutral-500 mb-3">03 — AI Security</p>
+          <h2 className="text-[28px] font-medium leading-[1.2] tracking-tight text-white sm:text-[36px]">
             Careful with your data, explicit about the machine.
           </h2>
           <p className="mt-5 max-w-md text-[13.5px] leading-relaxed text-neutral-400">
@@ -23,11 +30,11 @@ export default function Security() {
             before it reaches your customers.
           </p>
         </Reveal>
-        <Reveal delay="reveal-delay-1">
-          <ul className="divide-y divide-white/10 rounded-2xl border border-white/10">
+        <Reveal delay="0.12">
+          <ul className="divide-y divide-white/8 rounded-2xl border border-white/8 bg-white/[0.02]">
             {POINTS.map((point) => (
-              <li key={point} className="flex items-start gap-3 px-6 py-5">
-                <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+              <li key={point} className="flex items-start gap-3 px-6 py-5 hover:bg-white/[0.03] transition-colors">
+                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-purple-400" />
                 <span className="text-[13.5px] leading-relaxed text-neutral-300">{point}</span>
               </li>
             ))}

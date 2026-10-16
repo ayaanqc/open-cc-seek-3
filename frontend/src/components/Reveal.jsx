@@ -1,7 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
 
-/** Fade-and-rise wrapper fired once on scroll into view. */
-export default function Reveal({ children, className = '', delay = '' }) {
+/**
+ * Scroll-triggered text reveal: words fade up and stagger in as the section
+ * enters the viewport. Subtle, no bounce.
+ */
+export default function Reveal({ children, className = '', delay = 0 }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -11,21 +15,26 @@ export default function Reveal({ children, className = '', delay = '' }) {
       node.classList.add('is-visible');
       return undefined;
     }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          node.classList.add('is-visible');
+          gsap.fromTo(
+            node,
+            { opacity: 0, y: 28 },
+            { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay }
+          );
           observer.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: '0px 0px -10% 0px' }
+      { threshold: 0.13, rootMargin: '0px 0px -10% 0px' }
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [delay]);
 
   return (
-    <div ref={ref} className={`reveal ${delay} ${className}`}>
+    <div ref={ref} className={`reveal ${className}`}>
       {children}
     </div>
   );

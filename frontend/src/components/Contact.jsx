@@ -5,8 +5,9 @@ import Reveal from './Reveal.jsx';
 const EMPTY = { name: '', email: '', company: '', message: '' };
 
 /**
- * Contact — same POST /api/contact contract as before, restyled to the
- * reference: black field pills, single white pill submit.
+ * Contact — posts to POST /api/contact (same contract as the backend
+ * expects: name, email, optional company, message). Pill inputs, white
+ * pill submit, inline field errors.
  */
 export default function Contact() {
   const [form, setForm] = useState(EMPTY);
@@ -60,10 +61,13 @@ export default function Contact() {
           <p className="mt-8 font-mono text-[12px] text-neutral-600">hello@opticore.studio</p>
         </Reveal>
 
-        <Reveal delay="reveal-delay-1">
+        <Reveal delay={0.12}>
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
+                <label htmlFor="name" className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                  Name
+                </label>
                 <input
                   id="name"
                   name="name"
@@ -71,12 +75,14 @@ export default function Contact() {
                   value={form.name}
                   onChange={update('name')}
                   placeholder="Your name"
-                  aria-label="Your name"
                   className={inputClass('name')}
                 />
                 {fieldErrors.name && <p className="mt-2 pl-5 text-[11px] text-red-400">{fieldErrors.name}</p>}
               </div>
               <div>
+                <label htmlFor="email" className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                  Email
+                </label>
                 <input
                   id="email"
                   name="email"
@@ -84,13 +90,15 @@ export default function Contact() {
                   value={form.email}
                   onChange={update('email')}
                   placeholder="Email address"
-                  aria-label="Email address"
                   className={inputClass('email')}
                 />
                 {fieldErrors.email && <p className="mt-2 pl-5 text-[11px] text-red-400">{fieldErrors.email}</p>}
               </div>
             </div>
             <div>
+              <label htmlFor="company" className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                Company <span className="normal-case tracking-normal">(optional)</span>
+              </label>
               <input
                 id="company"
                 name="company"
@@ -98,12 +106,14 @@ export default function Contact() {
                 value={form.company}
                 onChange={update('company')}
                 placeholder="Company (optional)"
-                aria-label="Company (optional)"
                 className={inputClass('company')}
               />
               {fieldErrors.company && <p className="mt-2 pl-5 text-[11px] text-red-400">{fieldErrors.company}</p>}
             </div>
             <div>
+              <label htmlFor="message" className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                Project details
+              </label>
               <textarea
                 id="message"
                 name="message"
@@ -111,7 +121,6 @@ export default function Contact() {
                 value={form.message}
                 onChange={update('message')}
                 placeholder="What are you building, and what does success look like?"
-                aria-label="Project details"
                 className={`${inputClass('message')} resize-none rounded-[24px]`}
               />
               {fieldErrors.message && <p className="mt-2 pl-5 text-[11px] text-red-400">{fieldErrors.message}</p>}

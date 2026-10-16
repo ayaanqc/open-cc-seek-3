@@ -5,7 +5,6 @@ export default {
     extend: {
       colors: {
         void: '#000000',
-        panel: '#0a0a0a',
         bone: '#f5f5f4',
         mute: '#8e8e93',
         faint: '#3f3f46',
@@ -19,6 +18,9 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
+      animation: {
+        bounce: 'bounceDot 2s ease-in-out infinite',
       },
     },
   },

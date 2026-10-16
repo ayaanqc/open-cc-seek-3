@@ -1,11 +1,12 @@
-/** Minimal footer doubling as the Resources anchor. */
 export default function Footer() {
   return (
-    <footer id="resources" className="border-t border-white/10">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <p className="text-[15px] font-semibold tracking-tight text-white">opticore</p>
+    <footer id="resources" className="border-t border-white/8 bg-black">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <a href="#top" className="text-[17px] font-semibold tracking-tighter text-white">
+          opticore
+        </a>
         <nav aria-label="Footer">
-          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-neutral-500">
+          <ul className="flex flex-wrap items-center gap-x-8 gap-y-2 text-[12px] text-neutral-500">
             <li><a href="#services" className="transition-colors hover:text-white">Services</a></li>
             <li><a href="#how" className="transition-colors hover:text-white">How it works</a></li>
             <li><a href="#security" className="transition-colors hover:text-white">AI Security</a></li>
