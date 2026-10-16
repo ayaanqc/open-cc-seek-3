@@ -87,6 +87,37 @@ textarea:focus-visible {
   animation-play-state: paused;
 }
 
+/* Slow orbital spin for the hero caption ring. */
+@keyframes spin-slower {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slower {
+  animation: spin-slower 48s linear infinite;
+}
+
+/* Shimmer sweep across the hero accent line. */
+.shimmer-text {
+  background: linear-gradient(
+    110deg,
+    #8e8e93 15%,
+    #fafafa 38%,
+    #c4b5fd 50%,
+    #fafafa 62%,
+    #8e8e93 85%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-x 7s linear infinite;
+}
+
+@keyframes shimmer-x {
+  from { background-position: 200% center; }
+  to { background-position: -20% center; }
+}
+
 /* Keep anchored sections clear of the fixed navbar. */
 section[id] {
   scroll-margin-top: 84px;
@@ -97,4 +128,6 @@ section[id] {
   .reveal { opacity: 1; transform: none; transition: none; }
   .animate-bounce { animation: none; }
   .marquee-track { animation: none; }
+  .animate-spin-slower { animation: none; }
+  .shimmer-text { animation: none; }
 }
