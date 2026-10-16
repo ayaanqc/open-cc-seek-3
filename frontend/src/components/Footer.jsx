@@ -1,25 +1,19 @@
+/** Minimal footer doubling as the Resources anchor. */
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-white/5">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-14 flex flex-col lg:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-2">
-          <span className="h-5 w-5 rounded-full bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center text-[9px] font-bold text-white">
-            O
-          </span>
-          <span className="font-display text-[14px] font-bold tracking-tighter text-white">OPTICORE</span>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-8 text-[12px] font-medium text-mute uppercase tracking-widest">
-          <a href="#top" className="transition-colors hover:text-white">Home</a>
-          <a href="#about" className="transition-colors hover:text-white">About</a>
-          <a href="#services" className="transition-colors hover:text-white">Services</a>
-          <a href="#process" className="transition-colors hover:text-white">Process</a>
-          <a href="#clients" className="transition-colors hover:text-white">Clients</a>
-        </div>
-
-        <p className="text-[11px] text-mute">
-          © {new Date().getFullYear()} Opticore. All rights reserved.
-        </p>
+    <footer id="resources" className="border-t border-white/10">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <p className="text-[15px] font-semibold tracking-tight text-white">opticore</p>
+        <nav aria-label="Footer">
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-neutral-500">
+            <li><a href="#services" className="transition-colors hover:text-white">Services</a></li>
+            <li><a href="#how" className="transition-colors hover:text-white">How it works</a></li>
+            <li><a href="#security" className="transition-colors hover:text-white">AI Security</a></li>
+            <li><a href="#integrations" className="transition-colors hover:text-white">Integrations</a></li>
+            <li><a href="#contact" className="transition-colors hover:text-white">Contact</a></li>
+          </ul>
+        </nav>
+        <p className="font-mono text-[11px] text-neutral-600">© {new Date().getFullYear()} opticore studio</p>
       </div>
     </footer>
   );

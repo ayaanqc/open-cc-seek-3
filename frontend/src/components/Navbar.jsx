@@ -1,73 +1,54 @@
-import { useRef, useState } from 'react';
-import { useReveal } from '../lib/effects.js';
-import Btn from './Btn.jsx';
+import { useEffect, useState } from 'react';
 
 const LINKS = [
-  { label: 'Home', href: '#top' },
-  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Process', href: '#process' },
-  { label: 'Clients', href: '#clients' },
+  { label: 'How it works', href: '#how' },
+  { label: 'AI Security', href: '#security' },
+  { label: 'Integrations', href: '#integrations' },
+  { label: 'Resources', href: '#resources' },
 ];
 
+/** Top bar matching the reference: lowercase wordmark, centered pill nav, white pill CTA. */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const navRef = useRef(null);
 
-  useReveal(navRef, { threshold: 0.05 });
-
-  const handleScroll = () => setScrolled(window.scrollY > 10);
-  const activeHash = () => {
-    const hash = window.location.hash;
-    return hash || '#top';
-  };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <>
-      <nav
-        ref={navRef}
-        className="fixed inset-x-0 top-0 z-50 transition-all duration-400"
-        style={{
-          background: scrolled
-            ? 'rgba(5, 5, 10, 0.85)'
-            : 'rgba(5, 5, 10, 0.35)',
-          backdropFilter: scrolled ? 'blur(24px)' : 'blur(16px)',
-          borderBottom: `1px solid ${scrolled ? 'rgba(255,255,255,0.12)' : 'transparent'}`,
-        }}
-      >
-        <div className="mx-auto max-w-7xl h-16 flex items-center justify-between px-6 lg:px-10">
-          {/* Logo */}
-          <a href="#top" className="flex items-center gap-2">
-            <span className="h-5 w-5 rounded-full bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center text-[9px] font-bold text-white">
-              O
-            </span>
-            <span className="font-display text-[15px] font-bold tracking-tighter text-white">
-              OPTICORE
-            </span>
-          </a>
+    <header
+      className="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
+      style={{ background: scrolled ? 'rgba(0,0,0,0.82)' : 'transparent', backdropFilter: scrolled ? 'blur(16px)' : 'none' }}
+    >
+      <nav className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between px-5 sm:px-8">
+        <a href="#top" className="text-[17px] font-semibold tracking-tight text-white">
+          opticore
+        </a>
 
-          {/* Centered links */}
-          <div className="hidden md:flex items-center gap-8 text-[12px] font-medium text-mute uppercase tracking-widest">
-            {LINKS.map((link) => (
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 rounded-full border border-white/10 bg-white/[0.05] px-7 py-2.5 backdrop-blur-md lg:flex">
+          {LINKS.map((link) => (
+            <li key={link.label}>
               <a
-                key={link.label}
                 href={link.href}
-                className={`transition-colors duration-300 ${
-                  activeHash() === link.href.toLowerCase()
-                    ? 'text-white'
-                    : 'text-mute hover:text-white'
-                }`}
+                className="whitespace-nowrap text-[12px] font-normal text-neutral-400 transition-colors duration-200 hover:text-white"
               >
                 {link.label}
               </a>
-            ))}
-          </div>
+            </li>
+          ))}
+        </ul>
 
-          <Btn href="#contact" variant="primary">
-            Start a Project
-          </Btn>
-        </div>
+        <a
+          href="#contact"
+          className="rounded-full bg-white px-[18px] py-2 text-[12.5px] font-semibold text-black transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
+        >
+          Get started
+        </a>
       </nav>
-    </>
+    </header>
   );
 }
